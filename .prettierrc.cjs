@@ -1,6 +1,6 @@
 module.exports = {
-  plugins: [require('prettier-plugin-tailwindcss')],
-  tailwindConfig: './styles/tailwind.config.js',
+  plugins: [require('prettier-plugin-tailwindcss'), require('prettier-plugin-organize-imports')],
+  tailwindConfig: './tailwind.config.cjs',
   "trailingComma": "all",
   "tabWidth": 2,
   "semi": true,
