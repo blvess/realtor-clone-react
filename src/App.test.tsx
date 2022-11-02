@@ -41,7 +41,7 @@ describe('App Render all pages', () => {
         <App />
       </MemoryRouter>,
     );
-    expect(screen.getAllByText('Sign In')).toBeDefined();
+    expect(screen.getByRole('heading', { level: 1, name: /sign in/i })).toBeInTheDocument();
   });
 
   it('renders a sign-up page', () => {
@@ -50,6 +50,6 @@ describe('App Render all pages', () => {
         <App />
       </MemoryRouter>,
     );
-    expect(screen.getByText('Sign Up')).toBeDefined();
+    expect(screen.getByRole('heading', { level: 1, name: /sign up/i })).toBeInTheDocument();
   });
 });

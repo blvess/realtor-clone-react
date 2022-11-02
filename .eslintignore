@@ -3,5 +3,7 @@ dist/
 .prettierrc.cjs
 .eslintrc.cjs
 .stylelintrc.cjs
+tailwind.config.cjs
+postcss.config.cjs
 env.d.ts
 
