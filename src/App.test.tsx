@@ -32,7 +32,7 @@ describe('App Render all pages', () => {
         <App />
       </MemoryRouter>,
     );
-    expect(screen.getByText('Offers')).toBeDefined();
+    expect(screen.getAllByText('Offers')).toBeDefined();
   });
 
   it('renders a sign-in page', () => {
@@ -41,7 +41,7 @@ describe('App Render all pages', () => {
         <App />
       </MemoryRouter>,
     );
-    expect(screen.getByText('Sign In')).toBeDefined();
+    expect(screen.getAllByText('Sign In')).toBeDefined();
   });
 
   it('renders a sign-up page', () => {

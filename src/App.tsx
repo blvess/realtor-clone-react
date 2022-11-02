@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
 import ForgotPassword from './pages/ForgotPassword';
 import Home from './pages/Home';
 import Offers from './pages/Offers';
@@ -9,6 +10,7 @@ import SignUp from './pages/SignUp';
 function App() {
   return (
     <>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/offers" element={<Offers />} />
