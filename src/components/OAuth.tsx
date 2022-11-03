@@ -6,6 +6,8 @@ import { toast } from 'react-toastify';
 import { db } from '../firebase';
 
 function OAuth() {
+  const navigate = useNavigate();
+
   const onGoogleClick = async () => {
     // ...
     try {
@@ -29,10 +31,8 @@ function OAuth() {
       }
 
       // if all is successfull return to the homepage
-      const navigate = useNavigate();
       navigate('/');
     } catch (error) {
-      console.error(error);
       toast.error('Could not authorize with Google');
     }
   };

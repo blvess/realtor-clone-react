@@ -1,23 +1,37 @@
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import keyImage from '../assets/key.jpg';
 import OAuth from '../components/OAuth';
 
 function SignIn() {
-  const [formData, setFormData] = useState({
+  const navigate = useNavigate();
+  const [{ email, password }, setFormData] = useState({
     email: '',
     password: '',
   });
   const [showPassword, setShowPassword] = useState(false);
-
-  const { email, password } = formData;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.id]: e.target.value,
     }));
+  };
+
+  const onSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+      await signInWithEmailAndPassword(auth, email, password);
+
+      navigate('/');
+    } catch (err) {
+      toast.error('Sign In Error');
+    }
   };
 
   return (
@@ -28,7 +42,7 @@ function SignIn() {
           <img src={keyImage} alt="hand holding keys" className="w-full rounded-2xl" />
         </div>
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
-          <form>
+          <form onSubmit={onSubmit}>
             <input
               className="mb-6 w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transistion ease-in-out"
               type="email"
@@ -82,6 +96,7 @@ function SignIn() {
             <button
               className="w-full bg-blue-600 text-white px-7 py-3 text-sm font-medium uppercase rounded shadow-md hover:bg-blue-700 transition duration-150 ease-in-out hover:shadow-lg active:bg-blue-800 active:shadow-sm"
               type="submit"
+              data-testid="sign-in-submit"
             >
               Sign In
             </button>

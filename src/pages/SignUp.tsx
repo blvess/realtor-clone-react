@@ -9,6 +9,7 @@ import OAuth from '../components/OAuth';
 import { db } from '../firebase';
 
 function SignUp() {
+  const navigate = useNavigate();
   const [{ name, email, password }, setFormData] = useState({
     name: '',
     email: '',
@@ -41,7 +42,6 @@ function SignUp() {
       };
 
       await setDoc(doc(db, 'users', user.uid), userData);
-      const navigate = useNavigate();
       navigate('/');
     } catch (error) {
       toast.error('Something went wrong with registration!');
