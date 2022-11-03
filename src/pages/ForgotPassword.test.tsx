@@ -22,4 +22,10 @@ describe('Forgot password page links', () => {
     fireEvent.click(link);
     expect(await screen.getByRole('heading', { level: 1, name: /Sign Up/i })).toBeInTheDocument();
   });
+
+  it('should render a toast message on reset failure', async () => {
+    const signupButton = screen.getByRole('button', { name: /Send Reset Password/i });
+    fireEvent.click(signupButton);
+    expect(await screen.findByText('Password reset error')).toBeInTheDocument();
+  });
 });
