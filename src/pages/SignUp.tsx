@@ -1,10 +1,15 @@
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth';
+import { doc, setDoc, Timestamp } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import keyImage from '../assets/key.jpg';
 import OAuth from '../components/OAuth';
+import { db } from '../firebase';
 
 function SignUp() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,6 +26,31 @@ function SignUp() {
     }));
   };
 
+  const onSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    const auth = getAuth();
+
+    try {
+      const { user } = await createUserWithEmailAndPassword(auth, email, password);
+      // this updates the userCredential.user so no need to refetech
+      await updateProfile(user, {
+        displayName: name,
+      });
+      console.log(user);
+
+      const userData = {
+        name: user.displayName,
+        email: user.email,
+        createdAt: Timestamp.fromDate(new Date(user.metadata.creationTime as string)),
+      };
+
+      await setDoc(doc(db, 'users', user.uid), userData);
+      navigate('/');
+    } catch (error) {
+      toast.error('Something went wrong with registration!');
+    }
+  };
+
   return (
     <section>
       <h1 className="text-3xl text-center mt-6 font-bold">Sign Up</h1>
@@ -29,7 +59,7 @@ function SignUp() {
           <img src={keyImage} alt="hand holding keys" className="w-full rounded-2xl" />
         </div>
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
-          <form>
+          <form onSubmit={onSubmit}>
             <input
               className="mb-6 w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transistion ease-in-out"
               type="text"

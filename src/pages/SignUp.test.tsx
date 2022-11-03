@@ -22,4 +22,10 @@ describe('Sign Up ', () => {
     fireEvent.click(link);
     expect(await screen.getByRole('heading', { level: 1, name: /Sign/i })).toBeInTheDocument();
   });
+
+  it('should render a toast message on firebase failure', async () => {
+    const signupButton = screen.getByRole('button', { name: /sign up/i });
+    fireEvent.click(signupButton);
+    expect(await screen.findByText('Something went wrong with registration!')).toBeInTheDocument();
+  });
 });
