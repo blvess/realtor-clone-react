@@ -9,15 +9,12 @@ import OAuth from '../components/OAuth';
 import { db } from '../firebase';
 
 function SignUp() {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const [{ name, email, password }, setFormData] = useState({
     name: '',
     email: '',
     password: '',
   });
   const [showPassword, setShowPassword] = useState(false);
-
-  const { name, email, password } = formData;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
@@ -28,15 +25,14 @@ function SignUp() {
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const auth = getAuth();
 
     try {
+      const auth = getAuth();
       const { user } = await createUserWithEmailAndPassword(auth, email, password);
       // this updates the userCredential.user so no need to refetech
       await updateProfile(user, {
         displayName: name,
       });
-      console.log(user);
 
       const userData = {
         name: user.displayName,
@@ -45,6 +41,7 @@ function SignUp() {
       };
 
       await setDoc(doc(db, 'users', user.uid), userData);
+      const navigate = useNavigate();
       navigate('/');
     } catch (error) {
       toast.error('Something went wrong with registration!');
@@ -76,6 +73,7 @@ function SignUp() {
               onChange={onChange}
               placeholder="Email Address"
             />
+
             <div className="relative mb-6">
               <input
                 className="w-full px-4 py-2 text-xl text-gray-700 bg-white border-gray-300 rounded transistion ease-in-out"
