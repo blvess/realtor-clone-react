@@ -9,3 +9,4 @@ I added eslint and prettier to the project for source code consistency.
 - [ ] Give better error messages for toasts
 - [ ] Move database and auth logic out of components
 - [ ] Test password reset success with firebase local testing
+- [ ] Create custom hook to handle auth state change for header

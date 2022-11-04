@@ -1,10 +1,24 @@
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import defaultLogo from '../assets/rdc-logo-default.svg';
 
 export default function Header() {
+  const [pageState, setPageState] = useState('Sign In');
   // Get the current page path from (location.path: string)
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const auth = getAuth();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setPageState('Profile');
+      } else {
+        setPageState('Sign In');
+      }
+    });
+  }, [auth]);
 
   // Check to see if the current route matches the value given
   // Used for conditional formating of routes
@@ -44,7 +58,7 @@ export default function Header() {
                 matchRoute('/sign-in') && 'text-black border-b-red-500'
               }`}
             >
-              <button onClick={() => navigate('/sign-in')}>Sign In</button>
+              <button onClick={() => navigate('/profile')}>{pageState}</button>
             </li>
           </ul>
         </nav>
