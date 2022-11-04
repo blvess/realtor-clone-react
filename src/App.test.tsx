@@ -23,7 +23,8 @@ describe('App Render all pages', () => {
         <App />
       </MemoryRouter>,
     );
-    expect(screen.getByText('Profile')).toBeDefined();
+    // Screen redirects to sign in because of protected route
+    expect(screen.getByText('Sign In')).toBeDefined();
   });
 
   it('renders a offers page', () => {
