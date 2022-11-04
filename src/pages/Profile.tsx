@@ -2,7 +2,7 @@ import { getAuth } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Porfile() {
+export default function Porfile() {
   const auth = getAuth();
   const navigate = useNavigate();
   const [{ name, email }, setFormData] = useState({
@@ -56,5 +56,3 @@ function Porfile() {
     </>
   );
 }
-
-export default Porfile;

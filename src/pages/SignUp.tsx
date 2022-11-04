@@ -8,7 +8,7 @@ import keyImage from '../assets/key.jpg';
 import OAuth from '../components/OAuth';
 import { db } from '../firebase';
 
-function SignUp() {
+export default function SignUp() {
   const navigate = useNavigate();
   const [{ name, email, password }, setFormData] = useState({
     name: '',
@@ -132,5 +132,3 @@ function SignUp() {
     </section>
   );
 }
-
-export default SignUp;

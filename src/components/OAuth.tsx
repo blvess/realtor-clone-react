@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { db } from '../firebase';
 
-function OAuth() {
+export default function OAuth() {
   const navigate = useNavigate();
 
   const onGoogleClick = async () => {
@@ -48,5 +48,3 @@ function OAuth() {
     </button>
   );
 }
-
-export default OAuth;

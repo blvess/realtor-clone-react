@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import defaultLogo from '../assets/rdc-logo-default.svg';
 
-function Header() {
+export default function Header() {
   // Get the current page path from (location.path: string)
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -52,5 +52,3 @@ function Header() {
     </div>
   );
 }
-
-export default Header;

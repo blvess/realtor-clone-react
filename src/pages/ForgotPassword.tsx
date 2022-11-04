@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import keyImage from '../assets/key.jpg';
 import OAuth from '../components/OAuth';
 
-function ForgotPassword() {
+export default function ForgotPassword() {
   const [email, setEmail] = useState('');
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -77,5 +77,3 @@ function ForgotPassword() {
     </section>
   );
 }
-
-export default ForgotPassword;

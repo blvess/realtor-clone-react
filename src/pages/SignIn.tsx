@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import keyImage from '../assets/key.jpg';
 import OAuth from '../components/OAuth';
 
-function SignIn() {
+export default function SignIn() {
   const navigate = useNavigate();
   const [{ email, password }, setFormData] = useState({
     email: '',
@@ -110,5 +110,3 @@ function SignIn() {
     </section>
   );
 }
-
-export default SignIn;
